@@ -6,6 +6,7 @@
   --focused-base-outline: 0.2rem solid rgba(var(--color-foreground), 0.5);
   --focused-base-outline-offset: 0.3rem;
   --focused-base-box-shadow: 0 0 0 0.3rem rgb(var(--color-background)), 0 0 0.5rem 0.4rem rgba(var(--color-foreground), 0.3);
+  --card-corner-radius: var(--product-card-corner-radius, 4px);
 }
 
 .product-card-wrapper .card,
@@ -3491,13 +3492,12 @@ details-disclosure > details {
     --border-offset: 0.3px; /* Default is 1.3px as defined above in this file. This removes 1px to prevent the border from growing on buttons when this effect is on.  */
     box-shadow: 0 0 0 calc(var(--buttons-border-width) + var(--border-offset))
         rgba(var(--color-button-text), var(--border-opacity)),
-      0 0 0 var(--buttons-border-width) rgba(var(--color-button), var(--alpha-button-background)));
+      0 0 0 var(--buttons-border-width) rgba(var(--color-button), var(--alpha-button-background));
   }
 
   .animate--hover-vertical-lift .button:not([disabled]).button--secondary:hover:after {
     --border-offset: 0px; /* Prevent the border from growing on buttons when this effect is on. */
   }
-}
 
 /* Loading spinner */
 .loading__spinner {
@@ -3600,18 +3600,63 @@ details-disclosure > details {
 .product-card__image,
 .card__media img,
 .product-media-container img {
-  border-radius: 15px;
+  border-radius: 12px;
 }
 
 /* Add hover states */
 .product-card__image:hover,
 .card__media img:hover,
 .product-media-container img:hover {
-  border-radius: 15px !important;
+  border-radius: 12px !important;
 }
 
 /* If your theme uses media hover effects */
 .media--hover-effect img:hover,
 .card__media-hover img {
   border-radius: 15px !important;
+}
+
+/* Base image styles */
+.card__media,
+.card__media img,
+.media,
+.media > img,
+.product-card__image,
+.card-information__wrapper,
+.card-wrapper .card,
+.card-wrapper .card__inner,
+.global-media-settings {
+  border-radius: 12px !important;
+  overflow: hidden !important;
+}
+
+/* Handle zoom effect container */
+.media--hover-effect {
+  border-radius: 12px !important;
+  overflow: hidden !important;
+}
+
+/* Target the zoomed image */
+.media--hover-effect > img {
+  border-radius: 12px !important;
+  transition: transform var(--duration-long) ease !important;
+}
+
+/* Maintain border radius during zoom */
+.media--hover-effect:hover > img {
+  border-radius: 12px !important;
+  transform: scale(1.1);
+}
+
+/* Ensure parent containers don't clip */
+.card-wrapper {
+  overflow: visible !important;
+}
+
+/* Force border radius on zoom container */
+.card__media {
+  overflow: hidden !important;
+  border-radius: 12px !important;
+  transform: scale(1);
+  transition: transform var(--duration-long) ease !important;
 }
