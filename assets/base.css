@@ -2544,7 +2544,7 @@ input[type='checkbox'] {
 
 .header__icon:hover .icon,
 .modal__close-button:hover .icon {
-  transform: scale(1.07);
+  transform: scale(1);
 }
 
 .header__icon .icon {
@@ -2793,10 +2793,59 @@ details[open] > .header__submenu {
   padding: 0 1rem;
 }
 
+/* Menu item base styles */
 .header__menu-item {
-  padding: 1.2rem;
+  padding: 5px 10px;
+  margin: 0 20px;
+  position: relative;
+  overflow: hidden;
+  z-index: 1;
   text-decoration: none;
-  color: rgba(var(--color-foreground), 0.75);
+}
+
+/* Remove underline in all states */
+.header__menu-item,
+.header__menu-item:hover,
+.header__menu-item:focus,
+.header__menu-item.header__menu-item--active,
+.header__menu-item .header__active-menu-item  {
+  text-decoration: none;
+  transform: none;
+  transition: none;
+}
+
+/* Background fade animation */
+.header__menu-item::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(var(--color-foreground), 0.04);
+  border-radius: 6px;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+  z-index: -1;
+}
+
+/* Hover states */
+.header__menu-item:hover::before {
+  opacity: 1;
+}
+
+/* Active state */
+.header__menu-item.header__menu-item--active::before {
+  opacity: 1;
+}
+
+/* Spacing in menu list */
+.list-menu--inline > li {
+  margin-right: 10px;
+}
+
+.list-menu--inline > li:last-child {
+  margin-right: 0;
 }
 
 .header__menu-item:hover {
@@ -2804,24 +2853,27 @@ details[open] > .header__submenu {
 }
 
 .header__menu-item span {
-  transition: text-decoration var(--duration-short) ease;
+  display: inline-block;
+  transition: transform 0.3s ease;
 }
 
 .header__menu-item:hover span {
-  text-decoration: underline;
-  text-underline-offset: 0.3rem;
+  transform: none;  /* Text slide up */
 }
 
-details[open] > .header__menu-item {
-  text-decoration: underline;
+.header__menu-item:hover::before {
+  transform: scaleX(1);  /* Background fill */
 }
 
-details[open]:hover > .header__menu-item {
-  text-decoration-thickness: 0.2rem;
+.header__menu-item.header__menu-item--active::before {
+  transform: scaleX(1);
+  background-color: rgba(var(--color-foreground), 0.04);
 }
 
-details[open] > .header__menu-item .icon-caret {
-  transform: rotate(180deg);
+.header__menu-item:hover,
+.header__menu-item:focus,
+.header__menu-item.header__menu-item--active {
+  text-decoration: none;
 }
 
 .header__active-menu-item {
