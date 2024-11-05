@@ -3660,3 +3660,5 @@ details-disclosure > details {
   transform: scale(1);
   transition: transform var(--duration-long) ease !important;
 }
+/* End of zoom effect */
+}
